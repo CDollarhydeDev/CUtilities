@@ -95,7 +95,13 @@ public:
 	 * @brief Returns a const-qualified pointer to beginning of this string. No additional allocation.
 	 * @return Const-qualified pointer to beginning of this string
 	 */
-	const char* CStr() const;
+	const char* Str() const;
+
+		/**
+	 * @brief Returns a const-qualified pointer to beginning of this string. No additional allocation.
+	 * @return Const-qualified pointer to beginning of this string
+	 */
+	const char* GetValue() const;
 
 	/**
 	 * @brief Create a copy of this string with all letters set to lowercase
