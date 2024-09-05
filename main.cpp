@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "CustomVariables/CString/CString.h"
+#include "CustomVariables/String/String.h"
 
 void SetConsoleColor(int newColor)
 {
@@ -21,12 +21,12 @@ int main()
 		ResetConsoleColor();
 
 		// Testing Constructor 1
-		CString testString1("Hello World!");
+		String testString1("Hello World!");
 
 		std::cout << "String 1 message: " << testString1.GetValue() << " (Should be 'Hello World!')" << std::endl;
 
 		// Testing Constructor 2
-		CString testString2(testString1);
+		String testString2(testString1);
 		testString2 += "2";
 		std::cout << "String 2 message: " << testString2.GetValue() << " (Should be 'Hello World!2')" << std::endl;
 		std::cout << std::endl;
@@ -39,8 +39,8 @@ int main()
 		std::cout << "Length tests:" << std::endl;
 		ResetConsoleColor();
 
-		CString testString1("Hello World!");
-		CString testString2("Hello World!2");
+		String testString1("Hello World!");
+		String testString2("Hello World!2");
 
 		// Testing Length
 		std::cout << "Length of string 1: " << testString1.Length() << " (Should be 12)" << std::endl;
@@ -55,8 +55,8 @@ int main()
 		std::cout << "Character at tests:" << std::endl;
 		ResetConsoleColor();
 
-		CString testString1("Hello World!");
-		CString testString2("Hello World!2");
+		String testString1("Hello World!");
+		String testString2("Hello World!2");
 
 		// Testing CharacterAt 1
 		int positionToCheck1 = 1;
@@ -88,8 +88,8 @@ int main()
 		std::cout << "Equals tests:" << std::endl;
 		ResetConsoleColor();
 
-		CString testString1("Hello World!");
-		CString testString2("Hello World!2");
+		String testString1("Hello World!");
+		String testString2("Hello World!2");
 
 		// Testing equals
 		std::cout << "Does string 1 match string 2 Equals()? (Should be false!)" << std::endl;
@@ -140,18 +140,18 @@ int main()
 		ResetConsoleColor();
 
 		char testing1[] = "Hello World!";
-		CString testString1(testing1);
+		String testString1(testing1);
 
 		char testing2[] = "Hello World!2";
-		CString testString2(testing2);
+		String testString2(testing2);
 
 		// Testing Append
-		CString testString1Copy1(testString1);
+		String testString1Copy1(testString1);
 		testString1Copy1.Append(testString2);
 		std::cout << "Appended string: '" << testString1Copy1.GetValue() << "' (Should be 'Hello World!Hello World!2')" << std::endl;
 
 		// Testing Prepend
-		CString testString1Copy2(testString1);
+		String testString1Copy2(testString1);
 		testString1Copy2.Prepend(testString2);
 		std::cout << "Prepended string: '" << testString1Copy2.GetValue() << "' (Should be 'Hello World!2Hello World!')" << std::endl;
 		std::cout << std::endl;
@@ -161,12 +161,12 @@ int main()
 		ResetConsoleColor();
 
 		// Testing +=
-		CString concatString(testString1);
+		String concatString(testString1);
 		concatString += testString2;
 		std::cout << "+= string: '" << concatString.GetValue() << "' (Should be 'Hello World!Hello World!2')" << std::endl;
 
 		// Testing +
-		CString addedString = testString1 + testString2;
+		String addedString = testString1 + testString2;
 		std::cout << "+ string: '" << addedString.GetValue() << "' (Should be 'Hello World!Hello World!2')" << std::endl;
 		std::cout << std::endl;
 	}
@@ -178,8 +178,8 @@ int main()
 		std::cout << "ToLower and ToUpper tests:" << std::endl;
 		ResetConsoleColor();
 
-		CString testString1("Hello World!");
-		CString testString2("Hello World!2");
+		String testString1("Hello World!");
+		String testString2("Hello World!2");
 
 		// Testing to lower
 		std::cout << "String 1 to lower: '" << testString1.ToLower().GetValue() << "' (Should be 'hello world!')" << std::endl;
@@ -196,8 +196,8 @@ int main()
 		std::cout << "Find tests:" << std::endl;
 		ResetConsoleColor();
 
-		CString testString("Hello World!");
-		CString stringToFind("World");
+		String testString("Hello World!");
+		String stringToFind("World");
 
 		// Testing find methods
 		int startPosition = testString.Find(stringToFind);
@@ -231,9 +231,9 @@ int main()
 		std::cout << "Replace tests:" << std::endl;
 		ResetConsoleColor();
 
-		CString testString1("Hello World!");
-		CString stringToFind("World");
-		CString replacementString("There");
+		String testString1("Hello World!");
+		String stringToFind("World");
+		String replacementString("There");
 
 		testString1.Replace(stringToFind, replacementString);
 
@@ -248,8 +248,8 @@ int main()
 		std::cout << "= test:" << std::endl;
 		ResetConsoleColor();
 
-		CString testString1("Hello World!");
-		CString testString2 = testString1;
+		String testString1("Hello World!");
+		String testString2 = testString1;
 
 		std::cout << "= string value: '" << testString2 << "' (Should be Hello World!)" << std::endl;
 	}

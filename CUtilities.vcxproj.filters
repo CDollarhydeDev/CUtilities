@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CustomVariables\CString\CString.h">
+    <ClInclude Include="CustomVariables\String\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CustomVariables\CString\CString.cpp">
+    <ClCompile Include="CustomVariables\String\String.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">

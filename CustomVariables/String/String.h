@@ -7,7 +7,7 @@
  * @brief A managed string that grows as needed with basic text manipulation
  *		  methods, such as Length and Append.
 */
-class CString
+class String
 {
 public:
 	/**
@@ -17,7 +17,7 @@ public:
 	 *
 	 * Default constructor.
 	 */
-	CString();
+	String();
 
 	/**
 	 * @brief Initializes itself as a copy of the given c-string.
@@ -26,7 +26,7 @@ public:
 	 *
 	 * @details Specialized constructor.
 	 */
-	CString(const char* str);
+	String(const char* str);
 
 	/**
 	 * @brief Initializes itself as a copy of the given string.
@@ -36,12 +36,12 @@ public:
 	 * @details Copy constructor.
 	 *
 	 */
-	CString(const CString& other);
+	String(const String& other);
 
 	/**
 	 * @brief Deallocates all memory used.
 	 */
-	~CString();
+	~String();
 
 public:
 
@@ -73,7 +73,7 @@ public:
 				be at the same position when sorted with consideration for content
 				and the case of each letter of the string.
 	 */
-	bool Equals(const CString& Other) const;
+	bool Equals(const String& Other) const;
 
 	/**
 	 * @brief Concatenates the other string onto the end of this string (i.e., a = a + b)
@@ -81,7 +81,7 @@ public:
 	 * @return Reference to this string. May reallocate if current string is too small
 	 *		   to store full string.
 	 */
-	CString& Append(const CString& Str);
+	String& Append(const String& Str);
 
 	/**
 	 * @brief Adds other string onto the beginning of this string (i.e., a = b + a)
@@ -89,7 +89,7 @@ public:
 	 * @return Reference to this string. May reallocate if current string is too small
 	 *		   to store full string.
 	 */
-	CString& Prepend(const CString& Str);
+	String& Prepend(const String& Str);
 
 	/**
 	 * @brief Returns a const-qualified pointer to beginning of this string. No additional allocation.
@@ -107,26 +107,26 @@ public:
 	 * @brief Create a copy of this string with all letters set to lowercase
 	 * @return New copy of this string in all lowercase
 	 */
-	CString ToLower() const;
+	String ToLower() const;
 	/**
 	 * @brief Create a copy of this string with all letters set to uppercase
 	 * @return New copy of this string in all uppercase
 	 */
-	CString ToUpper() const;
+	String ToUpper() const;
 
 	/**
 	 * @brief Find the first occurrance of the given substring
 	 * @param The substring to find (must be lexicographically equivalent)
 	 * @return Index of the first occurance of the substring, or -1 if not found
 	 */
-	int Find(const CString& Str) const;
+	int Find(const String& Str) const;
 	/**
 	 * @brief Find the first occurrance of the given substring at or after the given start index
 	 * @param StartIndex The index to begin finding from
 	 * @param Str The substring to find (must be lexicographically equivalent)
 	 * @return Index of the first occurance of the substring, or -1 if not found
 	 */
-	int Find(size_t StartIndex, const CString& Str) const;
+	int Find(size_t StartIndex, const String& Str) const;
 
 	/**
 	 * @brief Replace all occurrances of the string to search for with the replacement string
@@ -137,7 +137,7 @@ public:
 				exceeded when replacing the string. It will not reallocate if
 				there is enough capacity to do it in-place.
 	 */
-	CString& Replace(const CString& Find, const CString& Replace);
+	String& Replace(const String& Find, const String& Replace);
 
 public:
 	/**
@@ -146,27 +146,27 @@ public:
 	 * @return A new string object with "this string" appended with "Other".
 	 * @details Optional. Remove if not implemented.
 	*/
-	CString operator+(const CString& Other) const;
+	String operator+(const String& Other) const;
 	/**
 	 * @brief Concatenates the other string onto the end of this string (a += b)
 	 * @param The contents to be added to the end
 	 * @return Reference to this string
 	 * @details Optional. Remove if not implemented. Follows the same memory rules as Append.
 	 */
-	CString& operator+=(const CString& Other);
+	String& operator+=(const String& Other);
 
 	/**
 	 * @brief Tests for lexicographical equality
 	 * @param Other The other string to test against
 	 * @return True if lexicographically equal, otherwise false
 	*/
-	bool operator==(const CString& Other) const;
+	bool operator==(const String& Other) const;
 	/**
 	 * @brief Tests for lexicographical inequality
 	 * @param Other The other string to test against
 	 * @return True if lexicographically inequal, otherwise false
 	 */
-	bool operator!=(const CString& Other) const;
+	bool operator!=(const String& Other) const;
 
 	/**
 	 * @brief Copies the contents of the other string, overwriting this string
@@ -176,7 +176,7 @@ public:
 	 *			copy the contents of the other string. Otherwise, should
 	 *			avoid reallocation.
 	*/
-	CString& operator=(const CString& Str);
+	String& operator=(const String& Str);
 
 	/**
 	 * @brief Zero-based subscript access to character at index
@@ -198,7 +198,7 @@ public:
 	 * @return Reference to the stream that was written to.
 	 * @details Optional. Remove if not implemented.
 	*/
-	friend std::ostream& operator<<(std::ostream& Stream, CString& Str);
+	friend std::ostream& operator<<(std::ostream& Stream, String& Str);
 
 private:
 	char* characterString;

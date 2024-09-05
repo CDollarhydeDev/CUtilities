@@ -1,9 +1,9 @@
-#include "CString.h"
+#include "String.h"
 
-CString::CString() : characterString(nullptr), characterStringLength(0)
+String::String() : characterString(nullptr), characterStringLength(0)
 {
 }
-CString::CString(const char* str) : characterString(nullptr), characterStringLength(0)
+String::String(const char* str) : characterString(nullptr), characterStringLength(0)
 {
 	// Get length of input string
 	size_t strSize = strlen(str);
@@ -18,7 +18,7 @@ CString::CString(const char* str) : characterString(nullptr), characterStringLen
 	// Add Null Character
 	characterString[characterStringLength] = 0x00;
 }
-CString::CString(const CString& other) : characterString(nullptr), characterStringLength(0)
+String::String(const String& other) : characterString(nullptr), characterStringLength(0)
 {
 	// Get length of input string
 	size_t otherSize = other.Length();
@@ -33,7 +33,7 @@ CString::CString(const CString& other) : characterString(nullptr), characterStri
 	// Add Null Character
 	characterString[characterStringLength] = 0x00;
 }
-CString::~CString()
+String::~String()
 {
 	if (characterString != nullptr)
 	{
@@ -43,21 +43,21 @@ CString::~CString()
 	}
 }
 
-size_t CString::Length() const
+size_t String::Length() const
 {
 	return characterStringLength;
 }
 
-char& CString::CharacterAt(size_t Index)
+char& String::CharacterAt(size_t Index)
 {
 	return characterString[Index];
 }
-const char& CString::CharacterAt(size_t Index) const
+const char& String::CharacterAt(size_t Index) const
 {
 	return characterString[Index];
 }
 
-bool CString::Equals(const CString& Other) const
+bool String::Equals(const String& Other) const
 {
 	if (strcmp(characterString, Other.GetValue()) >= 0)
 	{
@@ -67,7 +67,7 @@ bool CString::Equals(const CString& Other) const
 	return false;
 }
 
-CString& CString::Append(const CString& Str)
+String& String::Append(const String& Str)
 {
 	// Allocate memory for copy of existing string (+1 for null char)
 	size_t currentStringCopyLength = characterStringLength;
@@ -102,7 +102,7 @@ CString& CString::Append(const CString& Str)
 
 	return *this;
 }
-CString& CString::Prepend(const CString& Str)
+String& String::Prepend(const String& Str)
 {
 	// Allocate memory for copy of existing string (+1 for null char)
 	size_t currentStringCopyLength = characterStringLength;
@@ -138,16 +138,16 @@ CString& CString::Prepend(const CString& Str)
 	return *this;
 }
 
-const char* CString::Str() const
+const char* String::Str() const
 {
 	return characterString;
 }
-const char* CString::GetValue() const
+const char* String::GetValue() const
 {
 	return characterString;
 }
 
-CString CString::ToLower() const
+String String::ToLower() const
 {
 	// Allocate memory for copy of existing string (+1 for null char)
 	size_t currentStringCopyLength = characterStringLength;
@@ -172,10 +172,10 @@ CString CString::ToLower() const
 	currentStringCopy[currentStringCopyLength] = 0x00;
 
 	// Create local CString and return copy of it
-	CString lowerString(currentStringCopy);
+	String lowerString(currentStringCopy);
 	return lowerString;
 }
-CString CString::ToUpper() const
+String String::ToUpper() const
 {
 	// Allocate memory for copy of existing string (+1 for null char)
 	size_t currentStringCopyLength = characterStringLength;
@@ -200,11 +200,11 @@ CString CString::ToUpper() const
 	currentStringCopy[currentStringCopyLength] = 0x00;
 
 	// Create local CString and return (I think it creates a copy since its not a pointer, so no need to allocate for it to stay in scope)
-	CString upperString(currentStringCopy);
+	String upperString(currentStringCopy);
 	return upperString;
 }
 
-int CString::Find(const CString& Str) const
+int String::Find(const String& Str) const
 {
 	if (characterStringLength < Str.Length())
 	{
@@ -228,7 +228,7 @@ int CString::Find(const CString& Str) const
 
 	return -1;
 }
-int CString::Find(size_t StartIndex, const CString& Str) const
+int String::Find(size_t StartIndex, const String& Str) const
 {
 	if ((characterStringLength - (int)StartIndex) < Str.Length())
 	{
@@ -253,10 +253,10 @@ int CString::Find(size_t StartIndex, const CString& Str) const
 	return -1;
 }
 
-CString& CString::Replace(const CString& Find, const CString& Replace)
+String& String::Replace(const String& Find, const String& Replace)
 {
 	// Already made the find method, so I will just use it here to get the index
-	int startingPosition = CString::Find(Find);
+	int startingPosition = String::Find(Find);
 	if (startingPosition == -1)
 	{
 		// If -1, it wasn't found, so just return this without doing anything
@@ -311,25 +311,25 @@ CString& CString::Replace(const CString& Find, const CString& Replace)
 	return *this;
 }
 
-CString CString::operator+(const CString& Other) const
+String String::operator+(const String& Other) const
 {
-	CString newString(*this);
+	String newString(*this);
 	return newString.Append(Other);
 }
-CString& CString::operator+=(const CString& Other)
+String& String::operator+=(const String& Other)
 {
 	return Append(Other);
 }
-bool CString::operator==(const CString& Other) const
+bool String::operator==(const String& Other) const
 {
 	return Equals(Other);
 }
-bool CString::operator!=(const CString& Other) const
+bool String::operator!=(const String& Other) const
 {
 	return !Equals(Other);
 }
 
-CString& CString::operator=(const CString& Str)
+String& String::operator=(const String& Str)
 {
 	// Delete original if needed
 	if (characterString != nullptr)
@@ -355,16 +355,16 @@ CString& CString::operator=(const CString& Str)
 	return *this;
 }
 
-char& CString::operator[](size_t Index)
+char& String::operator[](size_t Index)
 {
 	return CharacterAt(Index);
 }
-const char& CString::operator[](size_t Index) const
+const char& String::operator[](size_t Index) const
 {
 	return CharacterAt(Index);
 }
 
-std::ostream& operator<<(std::ostream& Stream, CString& Str)
+std::ostream& operator<<(std::ostream& Stream, String& Str)
 {
 	return Stream << Str.GetValue();
 }
