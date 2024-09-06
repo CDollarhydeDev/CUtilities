@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <shlobj.h>
 
 #include "../CustomVariables/String/String.h"
 
@@ -12,6 +13,6 @@
 class Logging
 {
 public:
-	void WriteToLog(String logFolderPath, String DataToWrite);
+	void WriteToLog(String fileName, String dataToWrite);
 };
 
