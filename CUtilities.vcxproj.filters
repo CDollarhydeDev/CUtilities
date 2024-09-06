@@ -18,7 +18,10 @@
     <ClInclude Include="CustomVariables\String\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Testing.h">
+    <ClInclude Include="Testing\Testing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\Logging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -29,7 +32,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Testing.cpp">
+    <ClCompile Include="Testing\Testing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\Logging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

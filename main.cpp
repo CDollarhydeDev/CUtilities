@@ -1,11 +1,13 @@
 #include <iostream>
 
-#include "Testing.h"
-
-
+#include "Testing/Testing.h"
 
 int main()
 {
+	String logFolderPath = ;
+	Logging logManager;
+
+
 	Testing perform;
 
 	// Tests that the constructors work
