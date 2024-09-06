@@ -8,8 +8,59 @@ void ResetConsoleColor()
 {
 	std::cout << "\033[0m";
 }
+String PercentToString(size_t Int)
+{
+	if (Int == 0)
+	{
+		return String("0");
+	}
+	else if (Int == 10)
+	{
+		return String("10");
+	}
+	else if (Int == 20)
+	{
+		return String("20");
+	}
+	else if (Int == 30)
+	{
+		return String("30");
+	}
+	else if (Int == 40)
+	{
+		return String("40");
+	}
+	else if (Int == 50)
+	{
+		return String("50");
+	}
+	else if (Int == 60)
+	{
+		return String("60");
+	}
+	else if (Int == 70)
+	{
+		return String("70");
+	}
+	else if (Int == 80)
+	{
+		return String("80");
+	}
+	else if (Int == 90)
+	{
+		return String("90");
+	}
+	else if (Int == 100)
+	{
+		return String("100");
+	}
+	else
+	{
+		return String("");
+	}
+}
 
-Testing::Testing() : logManager(), logFolderPath("C:\\Users\\s249026\Desktop\\LoggingTest\\"), messageToLog()
+Testing::Testing() : logManager()
 {
 }
 
@@ -30,6 +81,24 @@ void Testing::PerformTests()
 		String runResult = RunTest(TestType(i), &percentageTracker);
 		messageBody += runResult;
 	}
+
+	// Get the timestamp for the current date and time
+	time_t timestamp = time(NULL);
+	char timeStampBuffer[100];
+	ctime_s(timeStampBuffer, sizeof(timeStampBuffer), &timestamp);
+
+	String timeStampString = timeStampBuffer;
+	timeStampString.Replace("\n", "");
+	timeStampString.Replace("  ", " ");
+
+	// Add it to the message header
+	messageHeader += timeStampString + " | Successful Percentage: ";
+	messageHeader += PercentToString(percentageTracker);
+	messageHeader += ".00%\n";
+
+	String dataToWrite = messageHeader + messageBody;
+
+	logManager.WriteToLog("Tests_Summary.txt", dataToWrite);
 }
 String Testing::RunTest(TestType testToRun, int* percentageTracker)
 {
@@ -102,7 +171,7 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 		}
 
 	case ToLower:
-		if (LengthTest())
+		if (ToLowerTest())
 		{
 			String resultMessage = "Test 5 | ToLower | Successful\n";
 			*percentageTracker += 10;
@@ -115,7 +184,7 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 		}
 
 	case ToUpper:
-		if (LengthTest())
+		if (ToUpperTest())
 		{
 			String resultMessage = "Test 6 | ToUpper | Successful\n";
 			*percentageTracker += 10;
@@ -128,7 +197,7 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 		}
 
 	case Find:
-		if (LengthTest())
+		if (FindTest())
 		{
 			String resultMessage = "Test 7 | Find | Successful\n";
 			*percentageTracker += 10;
@@ -141,7 +210,7 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 		}
 
 	case Replace:
-		if (LengthTest())
+		if (ReplaceTest())
 		{
 			String resultMessage = "Test 8 | Replace | Successful\n";
 			*percentageTracker += 10;
@@ -154,15 +223,15 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 		}
 
 	case Operators:
-		if (LengthTest())
+		if (AssignmentTest())
 		{
-			String resultMessage = "Test 9 | Operators | Successful\n";
+			String resultMessage = "Test 9 | Assignment | Successful\n";
 			*percentageTracker += 10;
 			return resultMessage;
 		}
 		else
 		{
-			String resultMessage = "Test 9 | Operators | Failed\n";
+			String resultMessage = "Test 9 | Assignment | Failed\n";
 			return resultMessage;
 		}
 
@@ -174,10 +243,10 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 bool Testing::LengthTest()
 {
 	char testMessage[] = "iulfodxVGPUSPPPsdfaswpdlpaWKPOAWFJG0P";
-	int testMessageLength = strlen(testMessage);
+	size_t testMessageLength = strlen(testMessage);
 
 	String testString(testMessage);
-	int testStringLength = testString.Length();
+	size_t testStringLength = testString.Length();
 
 	// Assert expected outcome
 	assert(testStringLength == testMessageLength);
@@ -199,22 +268,23 @@ bool Testing::CharacterAtTest()
 	int positionToCheck = 15;
 
 	// Assert expected outcomes
-	assert(!(testString.CharacterAt(positionToCheck) != 'a'));
-	assert(testString[positionToCheck] == 'a');
-	assert(!(testString[positionToCheck] == 'a'));
+	assert(testString.CharacterAt(positionToCheck) == 'e');
+	assert(!(testString.CharacterAt(positionToCheck) != 'e'));
+	assert(testString[positionToCheck] == 'e');
+	assert(!(testString[positionToCheck] != 'e'));
 
 	// Check the method
-	if (testString.CharacterAt(positionToCheck) != 'a')
+	if (testString.CharacterAt(positionToCheck) != 'e')
 	{
 		allSucceeded = false;
 	}
 
 	// Check the operators
-	if (!testString[positionToCheck] == 'a')
+	if (!(testString[positionToCheck] == 'e'))
 	{
 		allSucceeded = false;
 	}
-	if (testString[positionToCheck] != 'a')
+	if (testString[positionToCheck] != 'e')
 	{
 		allSucceeded = false;
 	}
@@ -273,7 +343,7 @@ bool Testing::AppendTest()
 	// Appl operators
 	testString1.Append(stringToAppend1);
 	testString2 += stringToAppend2;
-	String testString3 = testString3 + stringToAppend3;
+	testString3 = testString3 + stringToAppend3;
 
 	// Assert expected outcome
 	assert(testString1 == expectedOutcome1);
@@ -318,14 +388,77 @@ bool Testing::PrependTest()
 		return false;
 	}
 }
-
 bool Testing::ToUpperTest()
 {
-	String testString("hjghkjzrds");
-	String stringToPrepend("yjgghjgfd");
-	String expectedOutcome = "yjgghjgfdhjghkjzrds";
+	String testString("asdfgh");
+	String expectedOutcome = "ASDFGH";
+	String toUpperString = testString.ToUpper();
 
-	testString.Prepend(stringToPrepend);
+	// Assert expected outcome
+	assert(toUpperString == expectedOutcome);
+
+	if (toUpperString == expectedOutcome)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool Testing::ToLowerTest()
+{
+	String testString("ASDFGH");
+	String expectedOutcome = "asdfgh";
+	String toLowerString = testString.ToLower();
+
+	// Assert expected outcome
+	assert(toLowerString == expectedOutcome);
+
+	if (toLowerString == expectedOutcome)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool Testing::FindTest()
+{
+	bool allSucceeded = true;
+
+	String testString("Hello World!");
+	String stringToFind("World");
+
+	// Testing find methods
+	int startPosition = testString.Find(stringToFind);
+	int startPosition2 = testString.Find(7, stringToFind);
+
+	// Assert expected outcomes
+	assert(startPosition == 6);
+	assert(startPosition2 == -1);
+
+	if (startPosition == -1)
+	{
+		allSucceeded = false;
+	}
+
+	if (startPosition2 != -1)
+	{
+		allSucceeded = false;
+	}
+
+	return allSucceeded;
+}
+bool Testing::ReplaceTest()
+{
+	String testString("ThereWasThat");
+	String stringToFind("That");
+	String replacementString("There");
+	String expectedOutcome = "ThereWasThere";
+
+	testString.Replace(stringToFind, replacementString);
 
 	// Assert expected outcome
 	assert(testString == expectedOutcome);
@@ -339,232 +472,32 @@ bool Testing::ToUpperTest()
 		return false;
 	}
 }
-
-bool Testing::ToLowerTest()
+bool Testing::AssignmentTest()
 {
-	return false;
-}
+	bool allSucceeded = true;
 
-//void Testing::ConstructorTests()
-//{
-//	SetConsoleColor(32);
-//	std::cout << "Constructor tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	// Testing Constructor 1
-//	String testString1("Hello World!");
-//
-//	std::cout << "String 1 message: " << testString1.GetValue() << " (Should be 'Hello World!')" << std::endl;
-//
-//	// Testing Constructor 2
-//	String testString2(testString1);
-//	testString2 += "2";
-//	std::cout << "String 2 message: " << testString2.GetValue() << " (Should be 'Hello World!2')" << std::endl;
-//	std::cout << std::endl;
-//}
-//void Testing::LengthTests()
-//{
-//	SetConsoleColor(32);
-//	std::cout << "Length tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	String testString1("Hello World!");
-//	String testString2("Hello World!2");
-//
-//	// Testing Length
-//	std::cout << "Length of string 1: " << testString1.Length() << " (Should be 12)" << std::endl;
-//	std::cout << "Length of string 2: " << testString2.Length() << " (Should be 13)" << std::endl;
-//	std::cout << std::endl;
-//}
-//void Testing::CharacterAtTests()
-//{
-//	SetConsoleColor(32);
-//	std::cout << "Character at tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	String testString1("Hello World!");
-//	String testString2("Hello World!2");
-//
-//	// Testing CharacterAt 1
-//	int positionToCheck1 = 1;
-//	std::cout << "String 1 - Character at position " << positionToCheck1 << " is '" << testString1.CharacterAt(positionToCheck1) << "' (Should be e)" << std::endl;
-//
-//	// Testing CharacterAt 2
-//	int positionToCheck2 = 4;
-//	std::cout << "String 2 - Character at position " << positionToCheck2 << " is '" << testString2.CharacterAt(positionToCheck2) << "' (Should be o)" << std::endl;
-//	std::cout << std::endl;
-//
-//	SetConsoleColor(32);
-//	std::cout << "Array[] tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	// Testing [] 1
-//	int positionToCheck3 = 2;
-//	std::cout << "String 1 - Character at position " << positionToCheck3 << " is '" << testString1[positionToCheck3] << "' (Should be l)" << std::endl;
-//
-//	// Testing [] 2
-//	int positionToCheck4 = 6;
-//	std::cout << "String 2 - Character at position " << positionToCheck4 << " is '" << testString2[positionToCheck4] << "' (Should be w)" << std::endl;
-//	std::cout << std::endl;
-//}
-//void Testing::EqualsTests()
-//{
-//	SetConsoleColor(32);
-//	std::cout << "Equals tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	String testString1("Hello World!");
-//	String testString2("Hello World!2");
-//
-//	// Testing equals
-//	std::cout << "Does string 1 match string 2 Equals()? (Should be false!)" << std::endl;
-//	if (testString1.Equals(testString2))
-//	{
-//		std::cout << "True, it does match." << std::endl;
-//	}
-//	else
-//	{
-//		std::cout << "False, it does not match." << std::endl;
-//	}
-//	std::cout << std::endl;
-//
-//	SetConsoleColor(32);
-//	std::cout << "== and != tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	// Testing ==
-//	std::cout << "Does string 1 match string 2 with ==? (Should be false!)" << std::endl;
-//	if (testString1 == testString2)
-//	{
-//		std::cout << "True, it does match." << std::endl;
-//	}
-//	else
-//	{
-//		std::cout << "False, it does not match." << std::endl;
-//	}
-//	std::cout << std::endl;
-//
-//	// Testing !=
-//	std::cout << "Does string 1 not match string 2 with !=? (Should be true!)" << std::endl;
-//	if (testString1 != testString2)
-//	{
-//		std::cout << "True, it does not match." << std::endl;
-//	}
-//	else
-//	{
-//		std::cout << "False, it does match." << std::endl;
-//	}
-//	std::cout << std::endl;
-//}
-//void Testing::AppendPrependTests()
-//{
-//	SetConsoleColor(32);
-//	std::cout << "Append/Prepend tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	char testing1[] = "Hello World!";
-//	String testString1(testing1);
-//
-//	char testing2[] = "Hello World!2";
-//	String testString2(testing2);
-//
-//	// Testing Append
-//	String testString1Copy1(testString1);
-//	testString1Copy1.Append(testString2);
-//	std::cout << "Appended string: '" << testString1Copy1.GetValue() << "' (Should be 'Hello World!Hello World!2')" << std::endl;
-//
-//	// Testing Prepend
-//	String testString1Copy2(testString1);
-//	testString1Copy2.Prepend(testString2);
-//	std::cout << "Prepended string: '" << testString1Copy2.GetValue() << "' (Should be 'Hello World!2Hello World!')" << std::endl;
-//	std::cout << std::endl;
-//
-//	SetConsoleColor(32);
-//	std::cout << "+ and += operator tests:" << std::endl;
-//	ResetConsoleColor();
-//
-//	// Testing +=
-//	String concatString(testString1);
-//	concatString += testString2;
-//	std::cout << "+= string: '" << concatString.GetValue() << "' (Should be 'Hello World!Hello World!2')" << std::endl;
-//
-//	// Testing +
-//	String addedString = testString1 + testString2;
-//	std::cout << "+ string: '" << addedString.GetValue() << "' (Should be 'Hello World!Hello World!2')" << std::endl;
-//	std::cout << std::endl;
-//}
-void Testing::ToUpperAndLowerTests()
-{
-	SetConsoleColor(32);
-	std::cout << "ToLower and ToUpper tests:" << std::endl;
-	ResetConsoleColor();
-
-	String testString1("Hello World!");
-	String testString2("Hello World!2");
-
-	// Testing to lower
-	std::cout << "String 1 to lower: '" << testString1.ToLower().GetValue() << "' (Should be 'hello world!')" << std::endl;
-
-	// Testing to upper
-	std::cout << "String 1 to upper: '" << testString1.ToUpper().GetValue() << "' (Should be 'HELLO WORLD!')" << std::endl;
-	std::cout << std::endl;
-}
-void Testing::FindTests()
-{
-	SetConsoleColor(32);
-	std::cout << "Find tests:" << std::endl;
-	ResetConsoleColor();
-
-	String testString("Hello World!");
-	String stringToFind("World");
-
-	// Testing find methods
-	int startPosition = testString.Find(stringToFind);
-
-	if (startPosition == -1)
-	{
-		std::cout << "Couldn't find the target string" << std::endl;
-	}
-	else
-	{
-		std::cout << "Found the string at position: " << startPosition << " (Should be 6)" << std::endl;
-	}
-
-	int startPosition2 = testString.Find(7, stringToFind);
-
-	if (startPosition2 == -1)
-	{
-		std::cout << "Couldn't find the target string" << std::endl;
-	}
-	else
-	{
-		std::cout << "Found the word at position: " << startPosition2 << std::endl;
-	}
-	std::cout << std::endl;
-}
-void Testing::ReplaceTests()
-{
-	SetConsoleColor(32);
-	std::cout << "Replace tests:" << std::endl;
-	ResetConsoleColor();
-
-	String testString1("Hello World!");
-	String stringToFind("World");
-	String replacementString("There");
-
-	testString1.Replace(stringToFind, replacementString);
-
-	std::cout << "Replaced string: '" << testString1 << "' (Should be Hello There!)" << std::endl;
-	std::cout << std::endl;
-}
-void Testing::AssigmentTests()
-{
-	SetConsoleColor(32);
-	std::cout << "= test:" << std::endl;
-	ResetConsoleColor();
-
-	String testString1("Hello World!");
+	String testString1 = "Hello World!";
 	String testString2 = testString1;
 
-	std::cout << "= string value: '" << testString2 << "' (Should be Hello World!)" << std::endl;
+	// Assert expected outcomes
+	assert(testString1 == "Hello World!");
+	assert(testString2 == testString1);
+	assert(testString2 == "Hello World!");
+
+	if (testString1 != "Hello World!")
+	{
+		allSucceeded = false;
+	}
+
+	if (testString2 != testString1)
+	{
+		allSucceeded = false;
+	}
+
+	if (testString2 != "Hello World!")
+	{
+		allSucceeded = false;
+	}
+
+	return allSucceeded;
 }

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <ctime>
 
 #include "../Logging/Logging.h"
 #include "../CustomVariables/String/String.h"
@@ -30,6 +31,8 @@ public:
 	* @brief Runs all 10 method tests, including their corresponding operators
 	*/
 	void PerformTests();
+
+private:
 
 	/**
 	* @brief Runs a test for the specified test type
@@ -97,18 +100,30 @@ public:
 	*/
 	bool ToLowerTest();
 
-	// void ConstructorTests();
-	// void LengthTests();
-	// void CharacterAtTests();
-	// void EqualsTests();
-	// void AppendPrependTests();
-	void ToUpperAndLowerTests();
-	void FindTests();
-	void ReplaceTests();
-	void AssigmentTests();
+	/**
+	* @brief Tests the Find() method
+	*
+	* @return true if outputs as expected
+	* @return false if not
+	*/
+	bool FindTest();
 
-private:
+	/**
+	* @brief Tests the Replace() method
+	*
+	* @return true if outputs as expected
+	* @return false if not
+	*/
+	bool ReplaceTest();
+
+	/**
+	* @brief Tests the '=' operator
+	*
+	* @return true if outputs as expected
+	* @return false if not
+	*/
+	bool AssignmentTest();
+
 	Logging logManager;
-	String logFolderPath;
 };
 

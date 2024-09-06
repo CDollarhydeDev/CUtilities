@@ -151,7 +151,6 @@ public:
 	 * @brief Concatenates the other string onto the end of this string (a += b)
 	 * @param The contents to be added to the end
 	 * @return Reference to this string
-	 * @details Optional. Remove if not implemented. Follows the same memory rules as Append.
 	 */
 	String& operator+=(const String& Other);
 
