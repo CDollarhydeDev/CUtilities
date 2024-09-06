@@ -104,65 +104,65 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 	case ToLower:
 		if (LengthTest())
 		{
-			String resultMessage = "Test 0 | Length | Successful\n";
+			String resultMessage = "Test 5 | ToLower | Successful\n";
 			*percentageTracker += 10;
 			return resultMessage;
 		}
 		else
 		{
-			String resultMessage = "Test 0 | Length | Failed\n";
+			String resultMessage = "Test 5 | ToLower | Failed\n";
 			return resultMessage;
 		}
 
 	case ToUpper:
 		if (LengthTest())
 		{
-			String resultMessage = "Test 0 | Length | Successful\n";
+			String resultMessage = "Test 6 | ToUpper | Successful\n";
 			*percentageTracker += 10;
 			return resultMessage;
 		}
 		else
 		{
-			String resultMessage = "Test 0 | Length | Failed\n";
+			String resultMessage = "Test 6 | ToUpper | Failed\n";
 			return resultMessage;
 		}
 
 	case Find:
 		if (LengthTest())
 		{
-			String resultMessage = "Test 0 | Length | Successful\n";
+			String resultMessage = "Test 7 | Find | Successful\n";
 			*percentageTracker += 10;
 			return resultMessage;
 		}
 		else
 		{
-			String resultMessage = "Test 0 | Length | Failed\n";
+			String resultMessage = "Test 7 | Find | Failed\n";
 			return resultMessage;
 		}
 
 	case Replace:
 		if (LengthTest())
 		{
-			String resultMessage = "Test 0 | Length | Successful\n";
+			String resultMessage = "Test 8 | Replace | Successful\n";
 			*percentageTracker += 10;
 			return resultMessage;
 		}
 		else
 		{
-			String resultMessage = "Test 0 | Length | Failed\n";
+			String resultMessage = "Test 8 | Replace | Failed\n";
 			return resultMessage;
 		}
 
 	case Operators:
 		if (LengthTest())
 		{
-			String resultMessage = "Test 0 | Length | Successful\n";
+			String resultMessage = "Test 9 | Operators | Successful\n";
 			*percentageTracker += 10;
 			return resultMessage;
 		}
 		else
 		{
-			String resultMessage = "Test 0 | Length | Failed\n";
+			String resultMessage = "Test 9 | Operators | Failed\n";
 			return resultMessage;
 		}
 
@@ -300,8 +300,6 @@ bool Testing::AppendTest()
 }
 bool Testing::PrependTest()
 {
-	bool allSucceeded = true;
-
 	String testString("hjghkjzrds");
 	String stringToPrepend("yjgghjgfd");
 	String expectedOutcome = "yjgghjgfdhjghkjzrds";
@@ -319,6 +317,32 @@ bool Testing::PrependTest()
 	{
 		return false;
 	}
+}
+
+bool Testing::ToUpperTest()
+{
+	String testString("hjghkjzrds");
+	String stringToPrepend("yjgghjgfd");
+	String expectedOutcome = "yjgghjgfdhjghkjzrds";
+
+	testString.Prepend(stringToPrepend);
+
+	// Assert expected outcome
+	assert(testString == expectedOutcome);
+
+	if (testString == expectedOutcome)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool Testing::ToLowerTest()
+{
+	return false;
 }
 
 //void Testing::ConstructorTests()

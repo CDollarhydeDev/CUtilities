@@ -81,6 +81,22 @@ public:
 	*/
 	bool PrependTest();
 
+	/**
+	* @brief Tests the ToUpper() method
+	*
+	* @return true if outputs as expected
+	* @return false if not
+	*/
+	bool ToUpperTest();
+
+	/**
+	* @brief Tests the ToLower() method
+	*
+	* @return true if outputs as expected
+	* @return false if not
+	*/
+	bool ToLowerTest();
+
 	// void ConstructorTests();
 	// void LengthTests();
 	// void CharacterAtTests();
