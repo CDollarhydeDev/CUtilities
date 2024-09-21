@@ -234,9 +234,6 @@ String Testing::RunTest(TestType testToRun, int* percentageTracker)
 			String resultMessage = "Test 9 | Assignment | Failed\n";
 			return resultMessage;
 		}
-
-	default:
-		break;
 	}
 }
 

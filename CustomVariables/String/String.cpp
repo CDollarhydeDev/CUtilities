@@ -59,7 +59,7 @@ const char& String::CharacterAt(size_t Index) const
 
 bool String::Equals(const String& Other) const
 {
-	if (strcmp(characterString, Other.GetValue()) >= 0)
+	if (strcmp(characterString, Other.GetValue()) == 0)
 	{
 		return true;
 	}
@@ -273,7 +273,7 @@ String& String::Replace(const String& Find, const String& Replace)
 	memcpy(newCharacterString, characterString, startingPosition);
 
 	// Offset for tracking copied memory
-	int amountCopied = startingPosition;
+	size_t amountCopied = startingPosition;
 
 	// Copy the replace part of the string, offsetting by the amount already copied
 	memcpy(newCharacterString + amountCopied, Replace.GetValue(), Replace.Length());
@@ -282,10 +282,10 @@ String& String::Replace(const String& Find, const String& Replace)
 	amountCopied += Replace.Length();
 
 	// How many characters to skip from the original string
-	int charactersToIgnore = startingPosition + Find.Length();
+	size_t charactersToIgnore = startingPosition + Find.Length();
 
 	// How many characters are left after ignoring the start position and removed string
-	int remainingCharacters = characterStringLength - startingPosition - Find.Length();
+	size_t remainingCharacters = characterStringLength - startingPosition - Find.Length();
 
 	// Copy any values after the located string, offset by the already copied amount
 	memcpy(newCharacterString + amountCopied, characterString + charactersToIgnore, remainingCharacters);
