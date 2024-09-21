@@ -21,6 +21,13 @@ void Logging::WriteToLog(String fileName, String dataToWrite)
 
 	// Setup filepath with the desktop buffer retrieved
 	String filePath = desktopPathBuffer;
+
+	// Remove OneDrive from filepath so it's just desktop (idk why onedrive was showing up)
+	if (filePath.Find("\\OneDrive\\") != -1)
+	{
+		filePath.Replace("\\OneDrive\\", "\\");
+	}
+
 	filePath += "\\";
 	filePath += fileName;
 
