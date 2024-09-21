@@ -56,4 +56,6 @@ void Logging::WriteToLog(String fileName, String dataToWrite)
 
 		myFile.close();
 	}
+
+	std::cout << "Logged results to '" << filePath <<"'" << std::endl;
 }
