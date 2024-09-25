@@ -178,15 +178,15 @@ public:
 	String& operator=(const String& Str);
 
 	/**
-	 * @brief Zero-based subscript access to character at index
-	 * @param Index The index of the character referenced
-	 * @return Reference to character in string
+	 * @brief Zero-based subscript access to character at index.
+	 * @param Index The index of the character referenced.
+	 * @return Reference to character in string.
 	*/
 	char& operator[](size_t Index);
 	/**
-	 * @brief Zero-based subscript const-qualified access to character at index
-	 * @param Index The index of the character referenced
-	 * @return Const-qualified reference to character in string
+	 * @brief Zero-based subscript const-qualified access to character at index.
+	 * @param Index The index of the character referenced.
+	 * @return Const-qualified reference to character in string.
 	*/
 	const char& operator[](size_t Index) const;
 
