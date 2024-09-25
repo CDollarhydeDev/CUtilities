@@ -161,16 +161,16 @@ public:
 	*/
 	bool operator==(const String& Other) const;
 	/**
-	 * @brief Tests for lexicographical inequality
-	 * @param Other The other string to test against
-	 * @return True if lexicographically inequal, otherwise false
+	 * @brief Tests for lexicographical inequality.
+	 * @param Other The other string to test against.
+	 * @return True if lexicographically inequal, otherwise false.
 	 */
 	bool operator!=(const String& Other) const;
 
 	/**
-	 * @brief Copies the contents of the other string, overwriting this string
-	 * @param Str The other string to copy from
-	 * @return Reference to this string
+	 * @brief Copies the contents of the other string, overwriting this string.
+	 * @param Str The other string to copy from.
+	 * @return Reference to this string.
 	 * @details May reallocate if current string capacity is insufficient to
 	 *			copy the contents of the other string. Otherwise, should
 	 *			avoid reallocation.
